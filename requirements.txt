@@ -1,0 +1,6 @@
+# install requirements with: pip install -r requirements.txt
+
+albumentations
+opencv-python
+pyyaml
+numpy

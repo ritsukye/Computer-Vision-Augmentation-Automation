@@ -1,0 +1,102 @@
+seed: 42
+deterministic: true
+
+# UP NEXT: weather/season augmentation of images
+
+# transformation augment - background swap, hue shift, saturation shift,
+# (appearance)             brightness shift, contrast shift, gamma shift,
+#                          channel noise (RGB jitter)
+appearance:
+  hue_shift:
+    enabled: true
+    limit: 20
+
+  saturation_shift:
+    enabled: true
+    limit: 0.3
+
+  brightness_shift:
+    enabled: true
+    limit: 0.25
+
+  contrast_shift:
+    enabled: true
+    limit: 0.25
+
+  gamma_shift:
+    enabled: true
+    gamma_limit: [80, 120]
+
+  rgb_shift:
+    enabled: true
+    r_shift: 0.06
+    g_shift: 0.06
+    b_shift: 0.06
+
+  #local contrast for uneven lighting
+  clahe:
+    enabled: true
+    clip_limit: 4.0
+
+  #white balance shift, camera color temperature drift
+  white_balance_shift:
+    enabled: true
+    temperature: 0.08
+
+# obscure augment - blur levels, motion blur, Gaussian noise, JPEG compression artifacts, random erasing, downscale, upscale
+# (information loss)
+obscure:
+  gaussian_blur:
+    enabled: true
+    blur_limit: 5
+
+  motion_blur:
+    enabled: true
+    blur_limit: 7
+
+  gaussian_noise:
+    enabled: true
+    var_limit: [10, 50]
+
+  jpeg_compress:
+    enabled: true
+    quality: [40, 90]
+
+  cutout:
+    enabled: true
+    holes: 4
+    size: 0.2
+
+  resize_degrade:
+    enabled: true
+    min_scale: 0.4
+
+# translation augment - rotation, crop, zoom, shift translation, shear,
+# (geometry)                 horizontal flip, perspective transformation
+geometry:
+  rotate:
+    enabled: true
+    limit: 25
+
+  crop:
+    enabled: true
+    scale: [0.7, 1.0]
+
+  zoom:
+    enabled: true
+    limit: 0.2
+
+  shift:
+    enabled: true
+    limit: 0.1
+
+  shear:
+    enabled: true
+    limit: 10
+
+  perspective:
+    enabled: true
+    scale: 0.08
+
+  flip:
+    enabled: true
