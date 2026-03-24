@@ -23,4 +23,19 @@ python run.py
 
 The augmented images can be found under the data/augmented/ folder. There should 21 generated test case **types** of the .zip file uploaded, meaning if 10 images are uploaded, 210 augmented test cases are created.
 
+## GUI
 
+A Streamlit-based GUI is available for interactively uploading a single image and previewing all augmentation test cases.
+
+Run the GUI with:
+```bash
+streamlit run app.py
+```
+
+Then open **http://localhost:8501** in your browser.
+
+The GUI has two tabs:
+- **Config Augmentations** — all appearance, obscure, and geometry transforms defined in `augment/aug_config.yaml`
+- **Additional Test Cases** — flip variants, fixed rotations, resolution changes, and season/lighting effects
+
+Upload an image to see every augmentation applied. Use the **Download as ZIP** button to export all generated test case images at once.
