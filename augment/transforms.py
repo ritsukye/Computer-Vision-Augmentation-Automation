@@ -36,12 +36,8 @@ def build_aug(name, cfg):
             p=1,
         )
 
-    if name == "gaussian_noise":
-        var_min, var_max = cfg["var_limit"]
-        return A.GaussNoise(
-            std_range=(var_min ** 0.5/225, var_max ** 0.5/225),
-            p=1
-        )
+    if name == "gaussian_blur":
+        return A.GaussianBlur(sigma_limit=cfg["blur_limit"], p=1)
 
     if name == "motion_blur":
         return A.MotionBlur(blur_limit=cfg["blur_limit"], p=1)
