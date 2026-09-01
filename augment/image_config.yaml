@@ -1,11 +1,8 @@
 seed: 42
 deterministic: true
 
-# UP NEXT: weather/season augmentation of images
-
-# transformation augment - background swap, hue shift, saturation shift,
-# (appearance)             brightness shift, contrast shift, gamma shift,
-#                          channel noise (RGB jitter)
+# transformation augmentations
+# =============================================
 appearance:
   hue_shift:
     enabled: true
@@ -33,18 +30,19 @@ appearance:
     g_shift: 0.06
     b_shift: 0.06
 
-  #local contrast for uneven lighting
+  # local contrast for uneven lighting
   clahe:
     enabled: true
     clip_limit: 4.0
 
-  #white balance shift, camera color temperature drift
+  # white balance shift, camera color temperature drift
   white_balance_shift:
     enabled: true
     temperature: 0.08
 
-# obscure augment - blur levels, motion blur, Gaussian noise, JPEG compression artifacts, random erasing, downscale, upscale
-# (information loss)
+# obscure augmentations
+# =============================================
+
 obscure:
   gaussian_blur:
     enabled: true
@@ -71,8 +69,9 @@ obscure:
     enabled: true
     min_scale: 0.4
 
-# translation augment - rotation, crop, zoom, shift translation, shear,
-# (geometry)                 horizontal flip, perspective transformation
+# translation augmentations
+# =============================================
+
 geometry:
   rotate:
     enabled: true

@@ -1,0 +1,80 @@
+seed: 42
+deterministic: true
+
+# levels augmentations
+# =============================================
+levels:
+  gain_shift:
+    enabled: true
+    limit: 6  # dB
+
+  normalization:
+    enabled: true
+    method:
+      enabled: true
+      # technically you could use peak here, but we've decided to use mean sqrt
+      # for general-purpose audio augmentation
+      type: mean_sqrt
+
+  clipping:
+    enabled: true
+    limit: 0.99
+
+# noise augmentations
+# =============================================
+noise:
+  white_noise:
+    enabled: true
+    min_amplitude: 0.001
+    max_amplitude: 0.02
+
+  pink_noise:
+    enabled: true
+    min_amplitude: 0.001
+    max_amplitude: 0.02
+
+  brown_noise:
+    enabled: true
+    min_amplitude: 0.001
+    max_amplitude: 0.02
+
+  room_impulse_response:
+    enabled: true
+
+# temporal augmentations
+# =============================================
+temporal:
+  time_stretch:
+    enabled: true
+    min_rate: 0.9
+    max_rate: 1.1
+
+  time_shift:
+    enabled: true
+    max_fraction: 0.1
+
+  trim_pad:
+    enabled: true
+    max_trim_fraction: 0.1
+    max_pad_fraction: 0.1
+
+  speed_change:
+    enabled: true
+    min_rate: 0.9
+    max_rate: 1.1
+
+# spectral augmentations
+# =============================================
+spectral:
+  pitch_shift:
+    enabled: true
+    semitones: 2
+
+  # still WIP
+  # eq_filtering:
+  #   enabled: true
+
+  band-stop:
+    enabled: true
+    frequency: 1000
+    bandwidth: 100
