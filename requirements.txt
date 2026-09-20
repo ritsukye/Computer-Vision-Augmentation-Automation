@@ -6,3 +6,10 @@ albumentations
 opencv-python
 pyyaml
 numpy
+
+# audio augmentation
+librosa
+soundfile
+audiomentations>=0.40
+# MP3 encoder backend for audiomentations.Mp3Compression
+fast_mp3_augment 

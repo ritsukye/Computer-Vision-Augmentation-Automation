@@ -1,7 +1,7 @@
 seed: 42
 deterministic: true
 
-# transformation augmentations
+# color/tone augmentations
 # =============================================
 appearance:
   hue_shift:
@@ -30,19 +30,16 @@ appearance:
     g_shift: 0.06
     b_shift: 0.06
 
-  # local contrast for uneven lighting
   clahe:
     enabled: true
     clip_limit: 4.0
 
-  # white balance shift, camera color temperature drift
   white_balance_shift:
     enabled: true
     temperature: 0.08
 
 # obscure augmentations
 # =============================================
-
 obscure:
   gaussian_blur:
     enabled: true
@@ -71,7 +68,6 @@ obscure:
 
 # translation augmentations
 # =============================================
-
 geometry:
   rotate:
     enabled: true

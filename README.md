@@ -25,16 +25,19 @@ python run.py
 
 The augmented images can be found under data/augmented/image/. There should 21 generated test case **types** of the .zip file uploaded, meaning if 10 images are uploaded, 210 augmented test cases are created.
 
-# Instructions for Augmenting Audio (WIP)
+# Instructions for Augmenting Audio
 
-Audio support is being worked in progress but follows the same local process as images:
+ACCEPTED AUDIO FILE TYPES: ".wav", ".mp3", ".flac", ".ogg", ".m4a"
 
-- `augment/audio_config.yaml` — transform config, mirrors image_config.yaml's structure (curr all transforms disabled)
-- `augment/audio_transforms.py` — `build_aug(name, cfg)` not yet wired to a real audio library
-- `augment/augment_runner.py` — `process_audio()` already unzips `uploads/audio_dataset.zip` into `data/raw/audio/` and will write results to `data/augmented/audio/IC_<name>/` once transforms are implemented
-- The GUI's Audio mode lets you upload and preview a clip and lists the transforms queued up in `audio_config.yaml`
+Place your preferred .zip folder of clips under the project's uploads/ folder. Be sure to name it "audio_dataset.zip", then run `python run.py` (the same command handles both modalities).
 
-Image and audio data are kept in separate `image/`/`audio/` subfolders under `data/raw/` and `data/augmented/` (and separate `image_dataset.zip` / `audio_dataset.zip` uploads) so the two modalities can't collide on folder or file names, even where transform names might otherwise overlap (e.g. "noise", "shift").
+The augmented clips can be found under `data/augmented/audio/`, always written as `.wav` regardless of input format. There are 12 generated test case **types**, so 10 uploaded clips produce 120 augmented test cases.
+
+Audio transforms are backed by [`audiomentations`](https://iver56.github.io/audiomentations/) and grouped in `augment/audio_config.yaml` with transformation groups such as levels, noise, temporal, spectral, and codec.
+
+Toggle transforms with `enabled: true/false` and tune their parameters in that file, exactly like `image_config.yaml`. The GUI's Audio mode applies every enabled transform to one uploaded clip for preview.
+
+Image and audio data are kept in separate `image/`/`audio/` subfolders under `data/raw/` and `data/augmented/` (and separate `image_dataset.zip` / `audio_dataset.zip` uploads) so the two modes can't collide on folder or file names, even where transform names might otherwise overlap (e.g. "noise", "shift").
 
 ## GUI
 
@@ -52,3 +55,5 @@ Use the **Image / Audio** switch at the top to choose a modality. In Image mode 
 - **Additional Test Cases**: Flip variants, fixed rotations, resolution changes, and season/lighting effects
 
 Upload an image to see every augmentation applied. Use the **Download as ZIP** button to export all generated test case images at once (only augmentations of singular uploads).
+
+In Audio mode, upload a single clip to hear every enabled transform from `augment/audio_config.yaml` applied in place.

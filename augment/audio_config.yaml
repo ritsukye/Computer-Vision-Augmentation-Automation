@@ -1,24 +1,20 @@
 seed: 42
 deterministic: true
 
-# levels augmentations
+# level augmentations
 # =============================================
 levels:
   gain_shift:
     enabled: true
-    limit: 6  # dB
+    limit: 6  # +/- dB
 
   normalization:
-    enabled: true
-    method:
-      enabled: true
-      # technically you could use peak here, but we've decided to use mean sqrt
-      # for general-purpose audio augmentation
-      type: mean_sqrt
+    enabled: true  # peak-normalize so the loudest sample sits at 0 dBFS
 
   clipping:
     enabled: true
-    limit: 0.99
+    min_percentile: 0
+    max_percentile: 40
 
 # noise augmentations
 # =============================================
@@ -30,16 +26,13 @@ noise:
 
   pink_noise:
     enabled: true
-    min_amplitude: 0.001
-    max_amplitude: 0.02
+    min_snr_db: 5
+    max_snr_db: 40
 
   brown_noise:
     enabled: true
-    min_amplitude: 0.001
-    max_amplitude: 0.02
-
-  room_impulse_response:
-    enabled: true
+    min_snr_db: 5
+    max_snr_db: 40
 
 # temporal augmentations
 # =============================================
@@ -53,16 +46,6 @@ temporal:
     enabled: true
     max_fraction: 0.1
 
-  trim_pad:
-    enabled: true
-    max_trim_fraction: 0.1
-    max_pad_fraction: 0.1
-
-  speed_change:
-    enabled: true
-    min_rate: 0.9
-    max_rate: 1.1
-
 # spectral augmentations
 # =============================================
 spectral:
@@ -70,11 +53,19 @@ spectral:
     enabled: true
     semitones: 2
 
-  # still WIP
-  # eq_filtering:
-  #   enabled: true
-
-  band-stop:
+  eq_filtering:
     enabled: true
-    frequency: 1000
-    bandwidth: 100
+    gain_db: 12  # each of 7 bands gets a random gain within +/- this
+
+  bandstop_filter:
+    enabled: true
+    min_center_hz: 200
+    max_center_hz: 4000
+
+# codec augmentations
+# =============================================
+codec:
+  mp3_compress:
+    enabled: true
+    min_bitrate: 16  # kbps
+    max_bitrate: 64
