@@ -43,12 +43,9 @@ Image and audio data are kept in separate `image/`/`audio/` subfolders under `da
 
 A Streamlit-based GUI is available for interactively uploading a single image and previewing all augmentation test cases.
 
-Run the GUI with:
-```bash
-streamlit run app.py
-```
+Visit the site at: 
+https://computer-vision-augmentation-automation-bbjgevfulxwtwkf75qutez.streamlit.app/
 
-Then open **http://localhost:8501** in your browser.
 
 Use the **Image / Audio** switch at the top to choose a modality. In Image mode the GUI has two tabs:
 - **Config Augmentations**: All appearance, obscure, and geometry transforms defined in `augment/image_config.yaml`
